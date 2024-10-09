@@ -1,15 +1,28 @@
 package cleancode.studycafe.tobe2.model;
 
 import cleancode.studycafe.asis.exception.AppException;
+import cleancode.studycafe.tobe2.io.ConsoleInputHandler;
+import cleancode.studycafe.tobe2.io.ConsoleOutputHandler;
+import cleancode.studycafe.tobe2.io.InputHandler;
+import cleancode.studycafe.tobe2.io.OutputHandler;
+import cleancode.studycafe.tobe2.io.StudyCafeLockerPassReader;
+import cleancode.studycafe.tobe2.io.StudyCafePassReader;
+import cleancode.studycafe.tobe2.io.file.StudyCafeLockerPassFileReader;
+import cleancode.studycafe.tobe2.io.file.StudyCafePassFileReader;
 
 import java.util.List;
 
 public class StudyCafeProcessorFactory {
 
+    private static final StudyCafePassReader studyCafePassReader = new StudyCafePassFileReader();
+    private static final StudyCafeLockerPassReader studyCafeLockerPassReader = new StudyCafeLockerPassFileReader();
+    private static final InputHandler inputHandler = new ConsoleInputHandler();
+    private static final OutputHandler outputHandler = new ConsoleOutputHandler();
+
     private static final List<StudyCafeProcessor> processors = List.of(
-            new HourlyStudyCafeProcessor(),
-            new WeeklyStudyCafeProcessor(),
-            new FixedStudyCafeProcessor()
+            new HourlyStudyCafeProcessor(studyCafePassReader, inputHandler, outputHandler),
+            new WeeklyStudyCafeProcessor(studyCafePassReader, inputHandler, outputHandler),
+            new FixedStudyCafeProcessor(studyCafePassReader, studyCafeLockerPassReader, inputHandler, outputHandler)
     );
 
     private StudyCafeProcessorFactory() {
