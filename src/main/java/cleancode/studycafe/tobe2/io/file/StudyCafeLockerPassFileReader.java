@@ -2,6 +2,7 @@ package cleancode.studycafe.tobe2.io.file;
 
 import cleancode.studycafe.tobe2.io.StudyCafeLockerPassReader;
 import cleancode.studycafe.tobe2.model.StudyCafeLockerPass;
+import cleancode.studycafe.tobe2.model.StudyCafeLockerPasses;
 import cleancode.studycafe.tobe2.model.StudyCafePassType;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.List;
 public class StudyCafeLockerPassFileReader implements StudyCafeLockerPassReader {
 
     @Override
-    public List<StudyCafeLockerPass> readLockerPasses() {
+    public StudyCafeLockerPasses readLockerPasses() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/main/resources/cleancode/studycafe/locker.csv"));
             List<StudyCafeLockerPass> lockerPasses = new ArrayList<>();
@@ -27,7 +28,7 @@ public class StudyCafeLockerPassFileReader implements StudyCafeLockerPassReader 
                 lockerPasses.add(lockerPass);
             }
 
-            return lockerPasses;
+            return StudyCafeLockerPasses.of(lockerPasses);
         } catch (IOException e) {
             throw new RuntimeException("파일을 읽는데 실패했습니다.", e);
         }

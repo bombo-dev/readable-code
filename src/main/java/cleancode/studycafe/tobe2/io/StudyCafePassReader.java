@@ -1,9 +1,8 @@
 package cleancode.studycafe.tobe2.io;
 
-import cleancode.studycafe.tobe2.model.StudyCafePass;
+import cleancode.studycafe.tobe2.model.StudyCafePasses;
 
-import java.util.List;
 
 public interface StudyCafePassReader {
-    List<StudyCafePass> readStudyCafePasses();
+    StudyCafePasses readStudyCafePasses();
 }

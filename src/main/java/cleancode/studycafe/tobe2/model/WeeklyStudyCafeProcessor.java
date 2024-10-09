@@ -25,10 +25,8 @@ public class WeeklyStudyCafeProcessor implements StudyCafeProcessor {
 
     @Override
     public void process() {
-        List<StudyCafePass> studyCafePasses = studyCafePassReader.readStudyCafePasses();
-        List<StudyCafePass> weeklyPasses = studyCafePasses.stream()
-                .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.WEEKLY)
-                .toList();
+        StudyCafePasses studyCafePasses = studyCafePassReader.readStudyCafePasses();
+        StudyCafePasses weeklyPasses = studyCafePasses.findByType(StudyCafePassType.WEEKLY);
         outputHandler.showPassListForSelection(weeklyPasses);
         StudyCafePass selectedPass = inputHandler.getSelectPass(weeklyPasses);
         outputHandler.showPassOrderSummary(selectedPass, null);

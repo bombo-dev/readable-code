@@ -25,10 +25,8 @@ public class HourlyStudyCafeProcessor implements StudyCafeProcessor {
 
     @Override
     public void process() {
-        List<StudyCafePass> studyCafePasses = studyCafePassReader.readStudyCafePasses();
-        List<StudyCafePass> hourlyPasses = studyCafePasses.stream()
-                .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.HOURLY)
-                .toList();
+        StudyCafePasses studyCafePasses = studyCafePassReader.readStudyCafePasses();
+        StudyCafePasses hourlyPasses = studyCafePasses.findByType(StudyCafePassType.HOURLY);
         outputHandler.showPassListForSelection(hourlyPasses);
         StudyCafePass selectedPass = inputHandler.getSelectPass(hourlyPasses);
         outputHandler.showPassOrderSummary(selectedPass, null);

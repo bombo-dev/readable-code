@@ -28,24 +28,17 @@ public class FixedStudyCafeProcessor implements StudyCafeProcessor {
 
     @Override
     public void process() {
-        List<StudyCafePass> studyCafePasses = studyCafePassReader.readStudyCafePasses();
-        List<StudyCafePass> fixedPasses = studyCafePasses.stream()
-                .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.FIXED)
-                .toList();
-        outputHandler.showPassListForSelection(fixedPasses);
-        StudyCafePass selectedPass = inputHandler.getSelectPass(fixedPasses);
+        StudyCafePasses studyCafePasses = studyCafePassReader.readStudyCafePasses();
+        StudyCafePasses fixedStudyCafePasses = studyCafePasses.findByType(StudyCafePassType.FIXED);
 
-        List<StudyCafeLockerPass> lockerPasses = studyCafeLockerPassReader.readLockerPasses();
-        StudyCafeLockerPass lockerPass = lockerPasses.stream()
-                .filter(option ->
-                        option.getPassType() == selectedPass.getPassType()
-                                && option.getDuration() == selectedPass.getDuration()
-                )
-                .findFirst()
-                .orElse(null);
+        outputHandler.showPassListForSelection(fixedStudyCafePasses);
+        StudyCafePass selectedPass = inputHandler.getSelectPass(fixedStudyCafePasses);
+
+        StudyCafeLockerPasses lockerPasses = studyCafeLockerPassReader.readLockerPasses();
+        StudyCafeLockerPass lockerPass = lockerPasses.getLockerPassByTypeAndDuration(selectedPass);
 
         boolean lockerSelection = false;
-        if (lockerPass != null) {
+        if (isExists(lockerPass)) {
             outputHandler.askLockerPass(lockerPass);
             lockerSelection = inputHandler.getLockerSelection();
         }
@@ -55,5 +48,9 @@ public class FixedStudyCafeProcessor implements StudyCafeProcessor {
         } else {
             outputHandler.showPassOrderSummary(selectedPass, null);
         }
+    }
+
+    private static boolean isExists(StudyCafeLockerPass lockerPass) {
+        return lockerPass != null;
     }
 }
