@@ -7,6 +7,8 @@ import cleancode.studycafe.tobe2.io.StudyCafeFileHandler;
 import cleancode.studycafe.tobe2.model.StudyCafeLockerPass;
 import cleancode.studycafe.tobe2.model.StudyCafePass;
 import cleancode.studycafe.tobe2.model.StudyCafePassType;
+import cleancode.studycafe.tobe2.model.StudyCafeProcessor;
+import cleancode.studycafe.tobe2.model.StudyCafeProcessorFactory;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class StudyCafePassMachine {
 
             outputHandler.askPassTypeSelection();
             StudyCafePassType studyCafePassType = inputHandler.getPassTypeSelectingUserAction();
+            StudyCafeProcessor studyCafeProcessor = StudyCafeProcessorFactory.createProcessor(studyCafePassType);
 
             if (studyCafePassType == StudyCafePassType.HOURLY) {
                 StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
