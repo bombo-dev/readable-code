@@ -5,8 +5,6 @@ import cleancode.studycafe.tobe2.io.OutputHandler;
 import cleancode.studycafe.tobe2.io.StudyCafeLockerPassReader;
 import cleancode.studycafe.tobe2.io.StudyCafePassReader;
 
-import java.util.List;
-
 public class FixedStudyCafeProcessor implements StudyCafeProcessor {
 
     private final StudyCafePassReader studyCafePassReader;
@@ -19,6 +17,10 @@ public class FixedStudyCafeProcessor implements StudyCafeProcessor {
         this.studyCafeLockerPassReader = studyCafeLockerPassReader;
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
+    }
+
+    private static boolean isExists(StudyCafeLockerPass lockerPass) {
+        return lockerPass != null;
     }
 
     @Override
@@ -48,9 +50,5 @@ public class FixedStudyCafeProcessor implements StudyCafeProcessor {
         } else {
             outputHandler.showPassOrderSummary(selectedPass, null);
         }
-    }
-
-    private static boolean isExists(StudyCafeLockerPass lockerPass) {
-        return lockerPass != null;
     }
 }

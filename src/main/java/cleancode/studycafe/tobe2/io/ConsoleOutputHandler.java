@@ -4,8 +4,6 @@ import cleancode.studycafe.tobe2.model.StudyCafeLockerPass;
 import cleancode.studycafe.tobe2.model.StudyCafePass;
 import cleancode.studycafe.tobe2.model.StudyCafePasses;
 
-import java.util.List;
-
 public class ConsoleOutputHandler implements OutputHandler {
 
     public void showWelcomeMessage() {
@@ -35,8 +33,8 @@ public class ConsoleOutputHandler implements OutputHandler {
     public void askLockerPass(StudyCafeLockerPass lockerPass) {
         System.out.println();
         String askMessage = String.format(
-            "사물함을 이용하시겠습니까? (%s)",
-            lockerPass.display()
+                "사물함을 이용하시겠습니까? (%s)",
+                lockerPass.display()
         );
 
         System.out.println(askMessage);

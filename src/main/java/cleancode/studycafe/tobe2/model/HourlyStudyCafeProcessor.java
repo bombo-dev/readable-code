@@ -4,8 +4,6 @@ import cleancode.studycafe.tobe2.io.InputHandler;
 import cleancode.studycafe.tobe2.io.OutputHandler;
 import cleancode.studycafe.tobe2.io.StudyCafePassReader;
 
-import java.util.List;
-
 public class HourlyStudyCafeProcessor implements StudyCafeProcessor {
 
     private final StudyCafePassReader studyCafePassReader;

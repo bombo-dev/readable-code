@@ -4,7 +4,6 @@ import cleancode.studycafe.tobe2.model.StudyCafePass;
 import cleancode.studycafe.tobe2.model.StudyCafePassType;
 import cleancode.studycafe.tobe2.model.StudyCafePasses;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputHandler implements InputHandler {
